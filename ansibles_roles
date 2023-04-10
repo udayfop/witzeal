@@ -1,0 +1,12 @@
+- hosts: store
+  become: true
+  vars:
+    mysql_root_password: admin
+    tomcat_version: 9
+    memcached_listen_ip: 0.0.0.0
+    redis_port: 6379
+  roles:
+    - geerlingguy.mysql
+    - geerlingguy.java
+    - geerlingguy.memcached
+    - geerlingguy.redis
