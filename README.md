@@ -11,3 +11,5 @@ Assignment for DevOps engineer :
 Downloaded  war file from;
 https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/
 
+Exported roles from here 
+https://galaxy.ansible.com/home
