@@ -1,0 +1,50 @@
+- hosts: all
+  become: true
+
+  tasks:
+  - name: Update package list
+    become: true
+    apt:
+      update_cache: yes
+  - name: Install MySQL
+    apt:
+      name: mysql-server
+      state: present
+    tags: mysql
+
+  - name: Install Tomcat
+    apt:
+      name: tomcat9
+      state: present
+    tags: tomcat
+
+  - name: Install Memcached
+    apt:
+      name: memcached
+      state: present
+    tags: memcached
+
+  - name: Install Redis
+    apt:
+      name: redis-server
+      state: present
+    tags: redis
+
+  - name: 80to8080
+    copy:
+      src: server.xml
+      dest: /etc/tomcat9/server.xml
+    notify: Restart Tomcat
+    tags: tomcat
+
+  - name: Deploy sample WAR file
+    copy:
+      src: sample.war
+      dest: /var/lib/tomcat9/webapps/sample.war
+    notify: Restart Tomcat
+    tags: tomcat
+  handlers:
+  - name: Restart Tomcat
+    service:
+      name: tomcat9
+      state: restarted
