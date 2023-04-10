@@ -1,0 +1,10 @@
+- name: Check if process is running
+  hosts: uday
+  tasks:
+    - name: Check process status
+      shell: ps aux | grep your_process_name | grep -v grep
+      register: process_status
+
+    - name: Print process status
+      debug:
+        var: process_status.stdout_lines
